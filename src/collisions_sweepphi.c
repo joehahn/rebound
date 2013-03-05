@@ -54,6 +54,7 @@ double 	collisions_max2_r	= 0;
 int	sweeps_proc		= 1;	/**< Number of processors used for seeping algorithm. */
 int 	sweeps_init_done 	= 0;	/**< Used for initialisation of data structures. */
 int	N_collisions		= 0;
+int	N_collisions_max	= 0;
 
 static inline double min(double a, double b){ return (a>b)?b:a;}
 static inline double max(double a, double b){ return (b>a)?b:a;}
@@ -216,7 +217,7 @@ void collisions_sweep_insertionsort_phivaluelist(struct phivaluelist* phivl){
  * Sorts the particle array with insertion sort.
  */
 void collisions_sweep_insertionsort_particles(){
-	for(int j=1+N_collisions;j<N;j++){
+	for(int j=1+N_collisions;j<N_collisions_max;j++){
 		struct particle key = particles[j];
 		double keyphi = atan2(particles[j].y,particles[j].x);
 		int i = j - 1;
@@ -242,13 +243,13 @@ void collisions_search(){
 		// Sort particles according to their phi position to speed up sorting of lines.
 		// Initially the particles are not pre-sorted, thus qsort is faster than insertionsort.
 		// Note that this rearranges particles and will cause problems if the particle id is used elsewhere.
-		qsort (&(particles[N_collisions]), N-N_collisions, sizeof(struct particle), compare_particle);
+		qsort (&(particles[N_collisions]), N_collisions_max-N_collisions, sizeof(struct particle), compare_particle);
 	}else{
 		// Keep particles sorted according to their phi position to speed up sorting of lines.
 		collisions_sweep_insertionsort_particles();
 #endif //TREE
 	}
-	for (int i=N_collisions;i<N;i++){
+	for (int i=N_collisions;i<N_collisions_max;i++){
 		double phi  = atan2(particles[i].y,particles[i].x);
 		if (phi != phi) continue;
 		double r = sqrt(particles[i].x*particles[i].x + particles[i].y*particles[i].y);

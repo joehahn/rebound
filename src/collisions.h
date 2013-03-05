@@ -61,4 +61,5 @@ extern double collisions_max2_r;
  * Particle between 0 and N_collisions (excluding) will not be searched for collisions and not shuffled around.
  */
 extern int N_collisions;
+extern int N_collisions_max;
 #endif // _COLLISIONS_H

@@ -229,13 +229,16 @@ void display(){
 				for (int i=0;i<N;i++){
 					struct particle p = particles[i];
 					glTranslatef(p.x,p.y,p.z);
-					glScalef(p.r,p.r,p.r);
+					if (p.r>0.){ 
+						glScalef(p.r,p.r,p.r);
 #ifdef _APPLE
-					glCallList(display_dlist_sphere);
+						glCallList(display_dlist_sphere);
 #else //_APPLE
-					glutSolidSphere(1,40,10);
+						glutSolidSphere(1,40,10);
 #endif //_APPLE
-					glScalef(1./p.r,1./p.r,1./p.r);
+						glScalef(1./p.r,1./p.r,1./p.r);
+					}else{
+					}
 					glTranslatef(-p.x,-p.y,-p.z);
 				}
 #endif // COLLISIONS_NONE

@@ -61,6 +61,7 @@ void collision_resolve_hardsphere(struct collision c){
 	}
 #endif // MPI
 //	if (p1.lastcollision==t || p2.lastcollision==t) return;
+	if (p1.m==0. || p2.m==0.) return;
 	struct ghostbox gb = c.gb;
 	double x21  = p1.x + gb.shiftx  - p2.x; 
 	double y21  = p1.y + gb.shifty  - p2.y; 
@@ -133,6 +134,20 @@ void collision_resolve_hardsphere(struct collision c){
 	}else{
 		collisions_plog += -fabs(x21)*(oldvyouter-particles[c.p2].vy) * p2.m;
 		collisions_Nlog ++;
+	}
+
+	{
+		struct particle dust;
+		dust.x = particles[c.p2].x+x21/2.;
+		dust.y = particles[c.p2].y+y21/2.;
+		dust.z = particles[c.p2].z+z21/2.;
+		dust.vx = particles[c.p2].vx;
+		dust.vy = particles[c.p2].vy;
+		dust.vz = particles[c.p2].vz;
+		dust.m = 0;
+		dust.r = 0.00;
+		dust.weight = 1.;
+		particles_add(dust);
 	}
 
 #endif // COLLISIONS_NONE

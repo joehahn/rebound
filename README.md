@@ -3,6 +3,8 @@
 REBOUND - An open-source multi-purpose N-body code for collisional dynamics
 ===========================================================================
 
+...which I (jh) intend to adapt to investigate the physics of sharp-edged planetary rings. Stay tuned...
+
 Contributors
 ------------
 * Hanno Rein, Institute for Advanced Study (IAS), Princeton, <hanno@hanno-rein.de>

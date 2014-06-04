@@ -21,7 +21,7 @@ void problem_init(int argc, char* argv[]){
 	// Integrator parameters
 	OMEGA = 1.0;
 	dt = 1.0e-3;										// timestep
-    tmax = dt*Nsteps_per_output*Noutput;				// simulation stop time
+	tmax = dt*Nsteps_per_output*Noutput;				// simulation stop time
 //#ifdef OPENGL
 //	display_rotate_z = 90;								// display rotation angle (deg)
 //	display_rotate_x = 0;	
@@ -29,7 +29,7 @@ void problem_init(int argc, char* argv[]){
 
 	//Particle parameters
 	double x0_max = 10;									// particles' initial -x0_max < x < x0_max
-    double y0_max = 50;									// particles' initial y range
+	double y0_max = 50;									// particles' initial y range
     double z0_max = 0.0;								// particles' initial z range
 	boxsize = 1;
 	root_nx	= 20;
@@ -39,7 +39,7 @@ void problem_init(int argc, char* argv[]){
 	nghosty = 1;										// ghost boxes along y direction only
 	nghostz = 0;
 	double radius = 0.0;								// particle radius
-    double density = 0.5;								// particle density in cgs when radius is in cm
+	double density = 0.5;								// particle density in cgs when radius is in cm
 	coefficient_of_restitution = 0.5;
 	minimum_collision_velocity = 0.001;
 	init_box();
